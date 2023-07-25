@@ -1,21 +1,21 @@
-from django.shortcuts import render
-
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, logout
-from django.shortcuts import redirect
+from rest_framework import generics
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            login(request, form.get_user())
-            return redirect('todo_list')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+from .models import TodoItem
+from .serializers import TodoItemSerializer
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('login')
+class TodoItemListCreateView(generics.ListCreateAPIView):
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = TodoItem.objects.all()
+    serializer_class = TodoItemSerializer
+
+
+class TodoItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = TodoItem.objects.all()
+    serializer_class = TodoItemSerializer
