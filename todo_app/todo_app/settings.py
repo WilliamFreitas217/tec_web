@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'todo_app_backend'
 ]
@@ -97,7 +98,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'todo_app_backend.CustomUser'
+# AUTH_USER_MODEL = 'todo_app_backend.CustomUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
