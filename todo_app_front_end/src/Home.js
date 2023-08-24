@@ -18,7 +18,7 @@ const Home = ({token}) => {
       
 
     useEffect(() => {
-        fetchTodos();
+        // fetchTodos();
     }, []);
 
 
@@ -116,43 +116,13 @@ const Home = ({token}) => {
     }
 
     return (
-
-    // <div className="App">
-    //   <h1>Todo List</h1>
-    //   <button onClick={() => setIsModalOpen(true)}>Adicionar</button>
-    //   {cards.map((card, index) => (
-    //     <Card key={index} title={card.title} description={card.description} />
-    //   ))}
-    //   <Modal
-    //     isOpen={isModalOpen}
-    //     onClose={() => setIsModalOpen(false)}
-    //     onSave={()=>handleAddCard
-    //     }
-    //   />
-    // </div>
-
         <div className="homeContainer">
             <h2>Todo List</h2>
-            <button onClick={() => setShowAddForm(true)}>Add New Todo</button>
+            <button onClick={() => setShowAddForm(true)}>Adicionar Nova Tarefa</button>
             {showAddForm && (
-                // <div>
-                //     <input
-                //         type="text"
-                //         value={newTodoTitle}
-                //         onChange={(e) => setNewTodoTitle(e.target.value)}
-                //         placeholder="Enter new todo title"
-                //     />
-                //     <input
-                //         type="text"
-                //         value={newDescription}
-                //         onChange={(e) => setNewDescription(e.target.value)}
-                //         placeholder="Enter new todo description"
-                //     />
-                //     <button onClick={handleAddTodo}>Add</button>
-                // </div>
-                
                 <div className="modal">
                     <div className="modal-content">
+                        <h3>Crie uma nova tarefa</h3>
                         <input
                             type="text"
                             placeholder="Título"
@@ -163,10 +133,12 @@ const Home = ({token}) => {
                             type="text"
                             value={newDescription}
                             onChange={(e) => setNewDescription(e.target.value)}
-                            placeholder="Enter new todo description"
+                            placeholder="Descrição da tarefa"
                         />
-                        <button onClick={handleAddTodo}>Salvar</button>
-                        <button onClick={() =>setShowAddForm(false)}>Fechar</button> 
+                        <div className="button-content">
+                            <button onClick={handleAddTodo}>Salvar</button>
+                            <button onClick={() =>setShowAddForm(false)}>Fechar</button> 
+                        </div>
                     </div>
                 </div>
 
@@ -189,12 +161,15 @@ const Home = ({token}) => {
                                     value={todo.description}
                                     onChange={(e) => handleEditTodo(todo, e)}
                                 />
-                                <input
-                                    type="checkbox"
-                                    name="completed"
-                                    checked={todo.completed}
-                                    onChange={(e) => handleEditTodo(todo, e)}
-                                />
+                                <div className='checkbox'>
+                                    <h3>Tarefa Completa?</h3>
+                                    <input
+                                        type="checkbox"
+                                        name="completed"
+                                        checked={todo.completed}
+                                        onChange={(e) => handleEditTodo(todo, e)}
+                                    />
+                                </div>
                                 <button onClick={() => handleSaveEdit(todo)}>Save</button>
                                 <button onClick={() => handleCancelEdit()}>Cancel</button>
                             </div>

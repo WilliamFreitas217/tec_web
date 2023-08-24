@@ -9,7 +9,9 @@ const AppRoutes = ({ onLogin }) => {
         <div>
             {/* <Login /> */}
             <nav>
-                <ul>
+            <Link to="/login">Login</Link>
+
+                {/* <ul>
                     <li>
                         <Link to="/login">Login</Link>
                     </li>
@@ -19,7 +21,7 @@ const AppRoutes = ({ onLogin }) => {
                     <li>
                         <Link to="/home">Home</Link>
                     </li>
-                </ul>
+                </ul> */}
             </nav>
 
             <Routes>

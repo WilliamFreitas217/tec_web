@@ -16,14 +16,14 @@ function App() {
     return (
         <Router>
             <div className="App">
-                {/* <Home token={token} /> */}
+                <Home token={token} />
 
-                {token ? (
+                {/* {token ? (
                     <Home token={token} />
                 ) : (
                     <Routes onLogin={handleLogin} />
-                )}
-            </div>
+                )}  */}
+            </div> 
         </Router>
     );
 }

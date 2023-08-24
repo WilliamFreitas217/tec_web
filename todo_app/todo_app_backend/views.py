@@ -17,6 +17,9 @@ class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        return TodoItem.objects.filter(user=self.request.user)
+
     @action(detail=False, methods=['GET'])
     def user_todos(self, request):
         todos = TodoItem.objects.filter(user=request.user)
