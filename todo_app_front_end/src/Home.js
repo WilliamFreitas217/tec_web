@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import './Home.css';
+// import Card from './components/Card';
+// import Modal from './components/Modal';
 
 const Home = ({token}) => {
     const [todos, setTodos] = useState([]);
@@ -6,6 +9,13 @@ const Home = ({token}) => {
     const [newTodoTitle, setNewTodoTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
 
+    const [cards, setCards] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleAddCard = (card) => {
+        setCards([...cards, card]);
+        setIsModalOpen(false);
+    };
+      
 
     useEffect(() => {
         fetchTodos();
@@ -38,6 +48,9 @@ const Home = ({token}) => {
     };
 
     const handleAddTodo = async () => {
+        //colocar no if do response
+        setShowAddForm(false);
+
         // Create a new todo item
         const response = await fetch('http://127.0.0.1:8000/api/todo/', {
             method: 'POST',
@@ -102,32 +115,67 @@ const Home = ({token}) => {
     }
 
     return (
-        <div>
+
+    // <div className="App">
+    //   <h1>Todo List</h1>
+    //   <button onClick={() => setIsModalOpen(true)}>Adicionar</button>
+    //   {cards.map((card, index) => (
+    //     <Card key={index} title={card.title} description={card.description} />
+    //   ))}
+    //   <Modal
+    //     isOpen={isModalOpen}
+    //     onClose={() => setIsModalOpen(false)}
+    //     onSave={()=>handleAddCard
+    //     }
+    //   />
+    // </div>
+
+        <div className="homeContainer">
             <h2>Todo List</h2>
             <button onClick={() => setShowAddForm(true)}>Add New Todo</button>
             {showAddForm && (
-                <div>
-                    <input
-                        type="text"
-                        value={newTodoTitle}
-                        onChange={(e) => setNewTodoTitle(e.target.value)}
-                        placeholder="Enter new todo title"
-                    />
-                    <input
-                        type="text"
-                        value={newDescription}
-                        onChange={(e) => setNewDescription(e.target.value)}
-                        placeholder="Enter new todo description"
-                    />
-                    <button onClick={handleAddTodo}>Add</button>
+                // <div>
+                //     <input
+                //         type="text"
+                //         value={newTodoTitle}
+                //         onChange={(e) => setNewTodoTitle(e.target.value)}
+                //         placeholder="Enter new todo title"
+                //     />
+                //     <input
+                //         type="text"
+                //         value={newDescription}
+                //         onChange={(e) => setNewDescription(e.target.value)}
+                //         placeholder="Enter new todo description"
+                //     />
+                //     <button onClick={handleAddTodo}>Add</button>
+                // </div>
+                
+                <div className="modal">
+                    <div className="modal-content">
+                        <input
+                            type="text"
+                            placeholder="Título"
+                            value={newTodoTitle}
+                            onChange={(e) => setNewTodoTitle(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            value={newDescription}
+                            onChange={(e) => setNewDescription(e.target.value)}
+                            placeholder="Enter new todo description"
+                        />
+                        <button onClick={handleAddTodo}>Salvar</button>
+                        <button onClick={() =>setShowAddForm(false)}>Fechar</button> 
+                    </div>
                 </div>
+
             )}
 
             <ul>
                 {todos.map(todo => (
                     <li key={todo.id}>
                         {todo.edit ? (
-                            <div>
+                            <div className="card">
                                 <input
                                     type="text"
                                     name="title"

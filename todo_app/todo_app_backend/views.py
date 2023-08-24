@@ -23,9 +23,6 @@ class TodoViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(todos, many=True)
         return Response(serializer.data)
 
-    def get_queryset(self):
-        return TodoItem.objects.filter(user=self.request.user)
-
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 

@@ -16,6 +16,8 @@ function App() {
     return (
         <Router>
             <div className="App">
+                {/* <Home token={token} /> */}
+
                 {token ? (
                     <Home token={token} />
                 ) : (

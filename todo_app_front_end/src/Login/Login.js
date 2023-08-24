@@ -38,13 +38,6 @@ const Login = ({ onLogin }) => {
                     value={password} onChange={(e) => setPassword(e.target.value)}    
                 />
                 <button type="submit" className="submit-button">Login</button>
-                <div class="hint-container">
-                    <h2>Dica de Senha:</h2>
-                    <ul>
-                        <li> - Ter no mínimo 8 caracteres.</li>
-                        <li> - Ter ao menos um caractere especial.</li>
-                    </ul>
-                </div>
             </form>
             <p>Não tem uma conta? <Link to="/register">Registre aqui</Link></p>
         </div>
