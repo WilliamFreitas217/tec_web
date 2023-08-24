@@ -72,7 +72,8 @@ const Home = ({token}) => {
 
     const handleEditTodo = (todo, e) => {
         const eventName = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        console.log(value);
         const newTodos = todos.map(todoFilter => {
             return todoFilter.id === todo.id ? {...todoFilter, [eventName]: value} : todoFilter
         });
@@ -188,12 +189,24 @@ const Home = ({token}) => {
                                     value={todo.description}
                                     onChange={(e) => handleEditTodo(todo, e)}
                                 />
+                                <input
+                                    type="checkbox"
+                                    name="completed"
+                                    checked={todo.completed}
+                                    onChange={(e) => handleEditTodo(todo, e)}
+                                />
                                 <button onClick={() => handleSaveEdit(todo)}>Save</button>
                                 <button onClick={() => handleCancelEdit()}>Cancel</button>
                             </div>
                         ) : (
                             <>
                                 {todo.title} {todo.description}
+                                <input
+                                    type="checkbox"
+                                    name="completed"
+                                    checked={todo.completed}
+                                    readOnly
+                                />
                                 <button onClick={() => handleEditClick(todo)}>Edit</button>
                                 <button onClick={() => handleDeleteTodo(todo)}>Delete</button>
                             </>
